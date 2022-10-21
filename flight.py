@@ -52,6 +52,14 @@ recvThread.start()
 try:
     cmd('command') #Enter command mode
     getData('battery?', 'Battery Level', '%') #Get battery level
+    cmd('takeoff') #Takeoff
+    wait(3) #Wait 3 seconds
+    cmd('up 20') #Ascend 20cm
+    wait(3) #Wait 3 seconds
+    cmd('go 0 0 20 10') #Center the drone over the landing pad at an altitude of 20 centimeters
+    wait(3) #Wait 3 seconds
+    cmd('land') #Land the drone
+    getData('battery?', 'Battery Level', '%') #Get battery level
 
 except KeyboardInterrupt:
     print('\n..\n')
