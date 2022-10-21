@@ -34,17 +34,19 @@ recvThread = threading.Thread(target=recv)
 recvThread.start()
 
 try:
-    start_cmd = 'command'
-    sock.sendto(start_cmd.encode(encoding="utf-8"), tello_address)
-    print('Command sent: ' + start_cmd)
-    time.sleep(1)
-
-    check_battery_level = 'battery?'
-    battery_level = sock.sendto(check_battery_level.encode(encoding="utf-8"), tello_address)
-    print('Command sent: ' + check_battery_level)
-    print('The current battery level is: ' + str(battery_level) + '%')
+    cmd('command')
+    getData('battery?', 'Battery Level', '%')
 
 except KeyboradInterrupt:
     print('\n..\n')
     sock.close()
-    
+
+
+def cmd(command):
+    sock.sendto(command.encode(encoding="utf-8"), tello_address)
+    print('Command sent: ' + command)
+
+def getData(command, type, symbol):
+    return_value = sock.sendto(command.encode(encoding="utf-8"), tello_address)
+    print('Command sent: ' + command)
+    print(type + ' is currently:' + str(return_value) + symbol)
