@@ -17,7 +17,7 @@ locaddr = (host,port)
 
 # Create a UDP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-tello_address = ('192.168.10.1'`, 8889)
+tello_address = ('192.168.10.1', 8889)
 sock.bind(locaddr)
 
 def recv():
@@ -42,7 +42,7 @@ try:
     check_battery_level = 'battery?'
     battery_level = sock.sendto(check_battery_level.encode(encoding="utf-8"), tello_address)
     print('Command sent: ' + check_battery_level)
-    print('The current battery level is: ' + battery_level + '%')
+    print('The current battery level is: ' + str(battery_level) + '%')
 
 except KeyboradInterrupt:
     print('\n..\n')
